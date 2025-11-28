@@ -1,31 +1,65 @@
-# MEAN Stack CRUD Application
+# 🚀 MEAN Stack CRUD Application - DevOps Deployment
 
-A full-stack CRUD application built with MongoDB, Express.js, Angular 15, and Node.js. This application allows users to manage tutorials with create, read, update, and delete operations.
+[![CI/CD Pipeline](https://github.com/mohan-ux/crud-dd-task-mean-app/actions/workflows/deploy.yml/badge.svg)](https://github.com/mohan-ux/crud-dd-task-mean-app/actions/workflows/deploy.yml)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-blue?logo=docker)](https://hub.docker.com/u/mohanux)
+[![AWS](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws)](http://98.130.135.235)
+
+A full-stack CRUD application built with **MongoDB, Express.js, Angular 15, and Node.js (MEAN Stack)**. This project demonstrates containerization with Docker, cloud deployment on AWS EC2, and automated CI/CD pipeline using GitHub Actions.
+
+## 🌐 Live Demo
+
+**Application URL:** [http://98.130.135.235](http://98.130.135.235)
+
+---
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Local Development](#local-development)
-- [Docker Deployment](#docker-deployment)
-- [Cloud Deployment (Ubuntu VM)](#cloud-deployment-ubuntu-vm)
-- [CI/CD Pipeline Setup](#cicd-pipeline-setup)
-- [Screenshots](#screenshots)
-- [Troubleshooting](#troubleshooting)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Project Structure](#-project-structure)
+- [Prerequisites](#-prerequisites)
+- [Local Development](#-local-development)
+- [Docker Deployment](#-docker-deployment)
+- [Cloud Deployment (AWS EC2)](#-cloud-deployment-aws-ec2)
+- [CI/CD Pipeline](#-cicd-pipeline)
+- [Screenshots](#-screenshots)
+- [API Endpoints](#-api-endpoints)
+- [Troubleshooting](#-troubleshooting)
+- [Author](#-author)
+
+---
 
 ## ✨ Features
 
-- Create, Read, Update, Delete (CRUD) operations for tutorials
-- Search tutorials by title
-- Toggle published status
-- RESTful API backend
-- Responsive Angular frontend
-- Dockerized deployment
-- Nginx reverse proxy
-- Automated CI/CD with GitHub Actions
+- ✅ **CRUD Operations** - Create, Read, Update, Delete tutorials
+- ✅ **Search Functionality** - Search tutorials by title
+- ✅ **Publish/Unpublish** - Toggle tutorial published status
+- ✅ **RESTful API** - Express.js backend with MongoDB
+- ✅ **Responsive UI** - Angular 15 with Bootstrap
+- ✅ **Containerized** - Docker & Docker Compose
+- ✅ **Cloud Deployed** - AWS EC2 Ubuntu instance
+- ✅ **Reverse Proxy** - Nginx for routing
+- ✅ **Automated CI/CD** - GitHub Actions pipeline
 
-## 🏗️ Architecture
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Angular 15, TypeScript, Bootstrap 4 |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB 6.0 |
+| **Containerization** | Docker, Docker Compose |
+| **Reverse Proxy** | Nginx |
+| **Cloud Platform** | AWS EC2 (Ubuntu 22.04) |
+| **CI/CD** | GitHub Actions |
+| **Container Registry** | Docker Hub |
+
+---
+
+## 🏗 Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -253,30 +287,25 @@ cat ~/.ssh/github_actions_key
 
 ## 📸 Screenshots
 
-### 1. CI/CD Configuration and Execution
+### 1. CI/CD Pipeline - GitHub Actions
 
-![GitHub Actions Workflow](screenshots/github-actions-workflow.png)
-*GitHub Actions workflow configuration and successful execution*
+![CI/CD Pipeline](screenshots/Screenshot%202025-11-28%20133608.png)
+*GitHub Actions workflow showing successful build and deployment pipeline*
 
-### 2. Docker Image Build and Push
+### 2. Docker Hub - Container Images
 
-![Docker Hub Images](screenshots/docker-hub-images.png)
-*Docker images pushed to Docker Hub*
+![Docker Hub Images](screenshots/Screenshot%202025-11-28%20133650.png)
+*Docker images (mean-backend & mean-frontend) pushed to Docker Hub registry*
 
-### 3. Application Deployment
+### 3. Application UI - Working Demo
 
-![Running Containers](screenshots/docker-containers.png)
-*Docker containers running on the VM*
+![Application UI](screenshots/Screenshot%202025-11-28%20133733.png)
+*MEAN Stack CRUD application running in browser - Tutorial management interface*
 
-### 4. Working Application UI
+### 4. Docker Containers & Infrastructure
 
-![Application UI](screenshots/application-ui.png)
-*MEAN Stack CRUD application running in browser*
-
-### 5. Nginx Setup and Infrastructure
-
-![Nginx Configuration](screenshots/nginx-setup.png)
-*Nginx reverse proxy configuration*
+![Docker Containers](screenshots/Screenshot%202025-11-28%20133858.png)
+*Docker containers running on AWS EC2 with Nginx reverse proxy*
 
 ---
 
@@ -378,27 +407,74 @@ docker compose ps
 
 # Remove all containers and volumes
 docker compose down -v
+
+# SSH into a container
+docker exec -it mean-backend sh
 ```
+
+---
 
 ## 📄 API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/tutorials` | Get all tutorials |
-| GET | `/api/tutorials/:id` | Get tutorial by ID |
-| POST | `/api/tutorials` | Create new tutorial |
-| PUT | `/api/tutorials/:id` | Update tutorial |
-| DELETE | `/api/tutorials/:id` | Delete tutorial |
-| DELETE | `/api/tutorials` | Delete all tutorials |
-| GET | `/api/tutorials?title=keyword` | Search by title |
+| `GET` | `/api/tutorials` | Get all tutorials |
+| `GET` | `/api/tutorials/:id` | Get tutorial by ID |
+| `POST` | `/api/tutorials` | Create new tutorial |
+| `PUT` | `/api/tutorials/:id` | Update tutorial |
+| `DELETE` | `/api/tutorials/:id` | Delete tutorial |
+| `DELETE` | `/api/tutorials` | Delete all tutorials |
+| `GET` | `/api/tutorials?title=keyword` | Search by title |
+| `GET` | `/api/tutorials/published` | Get published tutorials |
 
-## 🤝 Contributing
+---
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## 🚀 Deployment Summary
+
+| Component | Details |
+|-----------|---------|
+| **Cloud Provider** | AWS EC2 |
+| **Instance Type** | t3.micro |
+| **OS** | Ubuntu 22.04 LTS |
+| **Public IP** | 98.130.135.235 |
+| **Application URL** | http://98.130.135.235 |
+| **Docker Hub** | [mohanux](https://hub.docker.com/u/mohanux) |
+| **GitHub Repo** | [mohan-ux/crud-dd-task-mean-app](https://github.com/mohan-ux/crud-dd-task-mean-app) |
+
+---
+
+## 📦 Docker Images
+
+| Image | Description | Registry |
+|-------|-------------|----------|
+| `mohanux/mean-backend:latest` | Node.js Express API | [Docker Hub](https://hub.docker.com/r/mohanux/mean-backend) |
+| `mohanux/mean-frontend:latest` | Angular 15 App | [Docker Hub](https://hub.docker.com/r/mohanux/mean-frontend) |
+
+---
+
+## 🔄 CI/CD Pipeline Flow
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   GitHub    │────▶│   Build     │────▶│  Push to    │────▶│  Deploy to  │
+│   Push      │     │   Images    │     │  Docker Hub │     │   AWS EC2   │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+      │                   │                   │                   │
+      ▼                   ▼                   ▼                   ▼
+  Trigger on         Build frontend      Push images         SSH into VM
+  main branch        & backend           with tags           Pull & restart
+```
+
+---
+
+## 👤 Author
+
+**Mohan**
+
+- GitHub: [@mohan-ux](https://github.com/mohan-ux)
+- Docker Hub: [mohanux](https://hub.docker.com/u/mohanux)
+
+---
 
 ## 📝 License
 
@@ -406,4 +482,11 @@ This project is licensed under the ISC License.
 
 ---
 
-**Note:** Remember to replace `YOUR_USERNAME` and `YOUR_DOCKER_USERNAME` with your actual GitHub and Docker Hub usernames throughout this documentation.
+## 🙏 Acknowledgments
+
+- DevOps assignment for demonstrating containerization, CI/CD, and cloud deployment skills
+- Built with MEAN Stack (MongoDB, Express, Angular, Node.js)
+
+---
+
+⭐ **If you found this project helpful, please give it a star!**
