@@ -25,7 +25,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Test application." });
+  res.json({ message: "Welcome to MEAN Stack CRUD Application - CI/CD Working!" });
 });
 
 require("./app/routes/turorial.routes")(app);
