@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies and fix @types/node version for Angular 15 compatibility
+RUN npm install && npm install @types/node@18.19.0 --save-dev
 
 # Copy application code
 COPY . .
