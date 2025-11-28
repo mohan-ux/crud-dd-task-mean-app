@@ -307,6 +307,11 @@ cat ~/.ssh/github_actions_key
 ![Docker Containers](screenshots/Screenshot%202025-11-28%20133858.png)
 *Docker containers running on AWS EC2 with Nginx reverse proxy*
 
+### 5. CI/CD Pipeline Complete - Full Workflow
+
+![CI/CD Pipeline Complete](screenshots/Screenshot%202025-11-28%20135230.png)
+*Complete CI/CD pipeline execution showing all stages completed successfully*
+
 ---
 
 ## 📁 Project Structure
