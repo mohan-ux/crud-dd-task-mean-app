@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=dd_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mean-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/dd_db --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  # Backend API Service
+  backend:
+    image: ${DOCKER_USERNAME:-yourusername}/mean-backend:${TAG:-latest}
+    container_name: mean-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/dd_db
+      - PORT=8080
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - mean-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Frontend Angular Service
+  frontend:
+    image: ${DOCKER_USERNAME:-yourusername}/mean-frontend:${TAG:-latest}
+    container_name: mean-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - mean-network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - mean-network
+
+networks:
+  mean-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
